@@ -1,25 +1,25 @@
 #include "pch.h"
 #include "mod.h"
 #include "Minecraft.hpp"
-
-/**¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª**
- |              MOD C++ÎÄ¼ş               |
- **¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª**
-ËµÃ÷£º
-¸ÃcppÎÄ¼şµÄÄ¿µÄÊÇ°üº¬MOD¹¦ÄÜÖ÷Òª´úÂë£¬Çë½«Ö÷Òª²¿·Ö´úÂëĞ´ÔÚÕâ¸öÎÄ¼şÄÚ£¡
-¡°T¡±¿ªÍ·µÄÏµÁĞHookºêÔÚÄ£¿é¼ÓÔØµÄÊ±ºòµ÷ÓÃ£¬Ê¹ÓÃ·½·¨Çë²Î¿¼MCMrARMµÄmodloader¡£
-µØÖ·£ºhttps://github.com/minecraft-linux/server-modloader/wiki
-Çë×¢Òâ£ºÊ¹ÓÃ·½·¨ÂÔÓĞ²»Í¬£¬±¾ÎÄ¼şµÄº¯Êı·ûºÅÓÃµÄÊÇPDB¹¤¾ßÉú³ÉµÄC++±äÁ¿£¬¶ø²»ÊÇ×Ö·û´®×ÖÃæÁ¿£¡
-ÁíÍâ£¬¸ÃÎÄ¼ş°üº¬Á½¸öº¯Êımod_initºÍmod_exit£¬·Ö±ğÔÚ¸ÃÄ£¿é¼ÓÔØ»òÍË³öÊ±µ÷ÓÃ¡£
-±¾Ä£¿éÀı×Ó£º
-THook(void,							// º¯Êı·µ»ØÀàĞÍ
-	MSSYM_XXXXXXXXXXXXXXXXXXXXX,	// º¯Êı·ûºÅÃû¶ÔÓ¦µÄC++±äÁ¿£¨Î»ÓÚSymHook.h£©
-	__int64 a1, __int64 a2) {		// º¯Êı²ÎÊıÀàĞÍÁĞ±í£¨¼ÙÉè´æÔÚ²ÎÊıa1Óëa2£©
+#include <sstream>
+/**â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”**
+ |              MOD C++æ–‡ä»¶               |
+ **â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”**
+è¯´æ˜ï¼š
+è¯¥cppæ–‡ä»¶çš„ç›®çš„æ˜¯åŒ…å«MODåŠŸèƒ½ä¸»è¦ä»£ç ï¼Œè¯·å°†ä¸»è¦éƒ¨åˆ†ä»£ç å†™åœ¨è¿™ä¸ªæ–‡ä»¶å†…ï¼
+â€œTâ€å¼€å¤´çš„ç³»åˆ—Hookå®åœ¨æ¨¡å—åŠ è½½çš„æ—¶å€™è°ƒç”¨ï¼Œä½¿ç”¨æ–¹æ³•è¯·å‚è€ƒMCMrARMçš„modloaderã€‚
+åœ°å€ï¼šhttps://github.com/minecraft-linux/server-modloader/wiki
+è¯·æ³¨æ„ï¼šä½¿ç”¨æ–¹æ³•ç•¥æœ‰ä¸åŒï¼Œæœ¬æ–‡ä»¶çš„å‡½æ•°ç¬¦å·ç”¨çš„æ˜¯PDBå·¥å…·ç”Ÿæˆçš„C++å˜é‡ï¼Œè€Œä¸æ˜¯å­—ç¬¦ä¸²å­—é¢é‡ï¼
+å¦å¤–ï¼Œè¯¥æ–‡ä»¶åŒ…å«ä¸¤ä¸ªå‡½æ•°mod_initå’Œmod_exitï¼Œåˆ†åˆ«åœ¨è¯¥æ¨¡å—åŠ è½½æˆ–é€€å‡ºæ—¶è°ƒç”¨ã€‚
+æœ¬æ¨¡å—ä¾‹å­ï¼š
+THook(void,							// å‡½æ•°è¿”å›ç±»å‹
+	MSSYM_XXXXXXXXXXXXXXXXXXXXX,	// å‡½æ•°ç¬¦å·åå¯¹åº”çš„C++å˜é‡ï¼ˆä½äºSymHook.hï¼‰
+	__int64 a1, __int64 a2) {		// å‡½æ•°å‚æ•°ç±»å‹åˆ—è¡¨ï¼ˆå‡è®¾å­˜åœ¨å‚æ•°a1ä¸a2ï¼‰
 	std::cout << "Hello world!" << std::endl;
-	original(a1, a2);				// µ÷ÓÃ¸Ãº¯ÊıHookÇ°µÄÔ­Ê¼º¯Êı
+	original(a1, a2);				// è°ƒç”¨è¯¥å‡½æ•°Hookå‰çš„åŸå§‹å‡½æ•°
 }
 */
-// ´Ë´¦¿ªÊ¼±àĞ´MOD´úÂë
+// æ­¤å¤„å¼€å§‹ç¼–å†™MODä»£ç 
 
 #include <map>
 #include <unordered_map>
@@ -28,7 +28,7 @@ THook(void,							// º¯Êı·µ»ØÀàĞÍ
 
 //std::map<short, std::string> BlockRegMap;
 
-// ×¢²á·½¿éµÄÊ±ºò¹¹½¨·½¿éID²éÕÒ±í
+// æ³¨å†Œæ–¹å—çš„æ—¶å€™æ„å»ºæ–¹å—IDæŸ¥æ‰¾è¡¨
 //THook(void,
 //	MSSYM_B1QE14registerBlocksB1AE17VanillaBlockTypesB2AAA5YAXXZ,
 //	void* _this) {
@@ -96,86 +96,193 @@ namespace Log {
 
 		auto Dimension(int v) {
 			switch (v) {
-			case 0: return u8"Ö÷ÊÀ½ç";
-			case 1: return u8"µØÓü";
-			case 2: return u8"Ä©µØ";
+			case 0: return u8"ä¸»ä¸–ç•Œ";
+			case 1: return u8"åœ°ç‹±";
+			case 2: return u8"æœ«åœ°";
 			}
-			return u8"Î´ÖªÎ¬¶È";
+			return u8"æœªçŸ¥ç»´åº¦";
 		}
+inline const string getday() {
+	auto timet = chrono::system_clock::to_time_t(chrono::system_clock::now());
+	tm time;
+	char buf[3] = { 0 };
+	localtime_s(&time, &timet);
+	string str(to_string((time.tm_year + 1900)));
+	UtoA_Fill(buf, time.tm_mon + 1);
+	str += buf;
+	UtoA_Fill(buf, time.tm_mday);
+	str += buf;
+	return str;
+}
+inline void fw(const string filen, const string instr) {
+	ofstream outfile;
+	outfile.open(filen, ios::app);
+	if (!outfile)
+	{
+		cout << "[" << TimeNow() << u8" INFO][BehaviorLog] " <<"æ— æ³•æ‰“å¼€æ—¥å¿—æ–‡ä»¶ä»¥å†™å…¥"<< endl;
+	}
+	outfile << instr << endl;
+	outfile.close();
+}
 	}
 
 	namespace Player {
 		using namespace Helper;
 
 		void Error(const std::string& title, const std::string& player_name, int dimension, const std::string& content) {
+stringstream ss;
+ss                              << Title(title) << " "
+				<< u8"ç©å®¶" << " " << player_name << " "
+				<< u8"åœ¨" << Dimension(dimension)
+				<< content << std::endl;
+string filen="Behavior"+getday();
+fw(filen,ss.str());
 			std::cout
 				<< Title(title) << " "
-				<< u8"Íæ¼Ò" << " " << player_name << " "
-				<< u8"ÔÚ" << Dimension(dimension)
+				<< u8"ç©å®¶" << " " << player_name << " "
+				<< u8"åœ¨" << Dimension(dimension)
 				<< content << std::endl;
+
 		}
 		void Block(const std::string& title, const std::string& player_name, char isStand, int dimension, const std::string& operation, const std::string & block_name, INT32 coordinator[]) {
 			auto block_name_inner = block_name;
 			if (block_name_inner == "")
-				block_name_inner = u8"Î´ÖªÀàĞÍ";
+				block_name_inner = u8"æœªçŸ¥ç±»å‹";
+stringstream ss;
+ss<< Title(title) << " "
+				<< u8"ç©å®¶" << " " << player_name << " " << (!isStand ? u8"æ‚¬ç©ºåœ° " : "")
+				<< u8"åœ¨" <<Dimension(dimension)<< " " << Coordinator(coordinator) << " "
+				<< operation << " "
+				<< block_name_inner << " " << u8"æ–¹å—ã€‚"
+				<< std::endl;
+		
+string filen="Behavior"+getday();
+fw(filen,ss.str());
 			std::cout
 				<< Title(title) << " "
-				<< u8"Íæ¼Ò" << " " << player_name << " " << (!isStand ? u8"Ğü¿ÕµØ " : "")
-				<< u8"ÔÚ" <<Dimension(dimension)<< " " << Coordinator(coordinator) << " "
+				<< u8"ç©å®¶" << " " << player_name << " " << (!isStand ? u8"æ‚¬ç©ºåœ° " : "")
+				<< u8"åœ¨" <<Dimension(dimension)<< " " << Coordinator(coordinator) << " "
 				<< operation << " "
-				<< block_name_inner << " " << u8"·½¿é¡£"
+				<< block_name_inner << " " << u8"æ–¹å—ã€‚"
 				<< std::endl;
 		}
 		void Item(const std::string& title, const std::string& player_name, char isStand, int dimension, const std::string& operation, const std::string& item_name, INT32 coordinator[]) {
-			std::cout
-				<< Title(title) << " "
-				<< u8"Íæ¼Ò" << " " << player_name << " " << (!isStand ? u8"Ğü¿ÕµØ " : "")
-				<< u8"ÔÚ" << Dimension(dimension) << " " << Coordinator(coordinator) << " "
+		stringstream ss;
+ss<< Title(title) << " "
+				<< u8"ç©å®¶" << " " << player_name << " " << (!isStand ? u8"æ‚¬ç©ºåœ° " : "")
+				<< u8"åœ¨" << Dimension(dimension) << " " << Coordinator(coordinator) << " "
 				<< operation << " "
-				<< item_name << " " << u8"ÎïÆ·¡£"
+				<< item_name << " " << u8"ç‰©å“ã€‚"
+				<< std::endl;
+		
+		
+string filen="Behavior"+getday();
+fw(filen,ss.str());
+
+std::cout
+				<< Title(title) << " "
+				<< u8"ç©å®¶" << " " << player_name << " " << (!isStand ? u8"æ‚¬ç©ºåœ° " : "")
+				<< u8"åœ¨" << Dimension(dimension) << " " << Coordinator(coordinator) << " "
+				<< operation << " "
+				<< item_name << " " << u8"ç‰©å“ã€‚"
 				<< std::endl;
 		}
 		void Interaction(const std::string& title, const std::string& player_name, char isStand, int dimension, const std::string& operation, const std::string& object_name, INT32 coordinator[]) {
-			std::cout
-				<< Title(title) << " "
-				<< u8"Íæ¼Ò" << " " << player_name << " " << (!isStand ? u8"Ğü¿ÕµØ " : "")
+			stringstream ss;
+ss<< Title(title) << " "
+				<< u8"ç©å®¶" << " " << player_name << " " << (!isStand ? u8"æ‚¬ç©ºåœ° " : "")
 				<< operation 
-				<< u8"ÔÚ" << Dimension(dimension) << " " << Coordinator(coordinator) << " " << u8"µÄ"
-				<< object_name << u8"¡£"
+				<< u8"åœ¨" << Dimension(dimension) << " " << Coordinator(coordinator) << " " << u8"çš„"
+				<< object_name << u8"ã€‚"
+				<< std::endl;
+		
+		
+string filen="Behavior"+getday();
+fw(filen,ss.str());
+
+std::cout
+				<< Title(title) << " "
+				<< u8"ç©å®¶" << " " << player_name << " " << (!isStand ? u8"æ‚¬ç©ºåœ° " : "")
+				<< operation 
+				<< u8"åœ¨" << Dimension(dimension) << " " << Coordinator(coordinator) << " " << u8"çš„"
+				<< object_name << u8"ã€‚"
 				<< std::endl;
 		}
 		void Container_In(const std::string& title, const std::string& player_name, int dimension, int slot, int count, const std::string& object_name) {
-			std::cout
+			stringstream ss;
+ss<< Title(title) << " "
+				<< u8"ç©å®¶" << " " << player_name << " "
+				<< u8"åœ¨" << " " << slot << " " << u8"æ§½å†…"
+				<< u8"æ”¾å…¥" << " "
+				<< count << " " << u8"ä¸ª" << " "
+				<< object_name << " " << u8"ç‰©å“ã€‚"
+				<< std::endl;
+		
+		
+string filen="Behavior"+getday();
+fw(filen,ss.str());
+
+std::cout
 				<< Title(title) << " "
-				<< u8"Íæ¼Ò" << " " << player_name << " "
-				<< u8"ÔÚ" << " " << slot << " " << u8"²ÛÄÚ"
-				<< u8"·ÅÈë" << " "
-				<< count << " " << u8"¸ö" << " "
-				<< object_name << " " << u8"ÎïÆ·¡£"
+				<< u8"ç©å®¶" << " " << player_name << " "
+				<< u8"åœ¨" << " " << slot << " " << u8"æ§½å†…"
+				<< u8"æ”¾å…¥" << " "
+				<< count << " " << u8"ä¸ª" << " "
+				<< object_name << " " << u8"ç‰©å“ã€‚"
 				<< std::endl;
 		}
 		void Container_Out(const std::string& title, const std::string& player_name, int dimension, int slot) {
-			std::cout
+			stringstream ss;
+ss<< Title(title) << " "
+				<< u8"ç©å®¶" << " " << player_name << " "
+				<< u8"å–å‡º" << " " << slot << " " << u8"æ§½å†…ç‰©å“ã€‚"
+				<< std::endl;
+		
+		
+string filen="Behavior"+getday();
+fw(filen,ss.str());
+
+std::cout
 				<< Title(title) << " "
-				<< u8"Íæ¼Ò" << " " << player_name << " "
-				<< u8"È¡³ö" << " " << slot << " " << u8"²ÛÄÚÎïÆ·¡£"
+				<< u8"ç©å®¶" << " " << player_name << " "
+				<< u8"å–å‡º" << " " << slot << " " << u8"æ§½å†…ç‰©å“ã€‚"
 				<< std::endl;
 		}
 
 		void ChangeDimension(const std::string& title, const std::string& player_name, int dimension, Vec3 *v) {
-			std::cout
+			stringstream ss;
+ss<< Title(title) << " "
+				<< u8"ç©å®¶ " << player_name << u8" æ”¹å˜ç»´åº¦è‡³ "
+				<< Dimension(dimension) << " " << Pos(v) + u8"ã€‚"
+				<< std::endl;
+		
+		
+string filen="Behavior"+getday();
+fw(filen,ss.str());
+
+std::cout
 				<< Title(title) << " "
-				<< u8"Íæ¼Ò " << player_name << u8" ¸Ä±äÎ¬¶ÈÖÁ "
-				<< Dimension(dimension) << " " << Pos(v) + u8"¡£"
+				<< u8"ç©å®¶ " << player_name << u8" æ”¹å˜ç»´åº¦è‡³ "
+				<< Dimension(dimension) << " " << Pos(v) + u8"ã€‚"
 				<< std::endl;
 		}
 
 		void ChatMessage(const std::string& title, const std::string& player_name, const std::string& target,
 			const std::string& msg, const std::string& chat_style) {
-			std::cout
+			stringstream ss;
+ss<< Title(title) << " "
+				<< u8"ç©å®¶ " << player_name << (target != "" ? u8" æ‚„æ‚„åœ°å¯¹ " + target : "")
+				<< u8" è¯´:" << msg
+				<< std::endl;
+		
+		
+string filen="Behavior"+getday();
+fw(filen,ss.str());
+
+std::cout
 				<< Title(title) << " "
-				<< u8"Íæ¼Ò " << player_name << (target != "" ? u8" ÇÄÇÄµØ¶Ô " + target : "")
-				<< u8" Ëµ:" << msg
+				<< u8"ç©å®¶ " << player_name << (target != "" ? u8" æ‚„æ‚„åœ°å¯¹ " + target : "")
+				<< u8" è¯´:" << msg
 				<< std::endl;
 		}
 
@@ -184,14 +291,22 @@ namespace Log {
 	namespace Dieinfo {
 		using namespace Helper;
 		void showDie(const std::string& title, const std::string& mob_name, const std::string& src_name) {
-			std::cout
+			stringstream ss;
+ss<< Title(title) << " "
+				<< mob_name << u8" è¢« " << ((src_name != "") ? src_name : " ") << u8" æ€æ­»äº†" << std::endl;
+		
+		
+string filen="Behavior"+getday();
+fw(filen,ss.str());
+
+std::cout
 				<< Title(title) << " "
-				<< mob_name << u8" ±» " << ((src_name != "") ? src_name : " ") << u8" É±ËÀÁË" << std::endl;
+				<< mob_name << u8" è¢« " << ((src_name != "") ? src_name : " ") << u8" æ€æ­»äº†" << std::endl;
 		}
 	}
 };
 
-// µ÷ÊÔĞÅÏ¢
+// è°ƒè¯•ä¿¡æ¯
 template<typename T>
 static void PR(T arg) {
 #ifndef RELEASED
@@ -199,25 +314,25 @@ static void PR(T arg) {
 #endif // !RELEASED
 }
 
-// ±¨´í±êÊ¶
+// æŠ¥é”™æ ‡è¯†
 static bool terror = false;
 
 int s = 5;
 
-// Ç¿ÖÆ±¨´í
+// å¼ºåˆ¶æŠ¥é”™
 static void herror() {
 	PR(1 / (s - 5));
 }
 
 
-// Íæ¼Ò·ÅÖÃ·½¿é
+// ç©å®¶æ”¾ç½®æ–¹å—
 THook(__int64,
 	MSSYM_MD5_949c4cd05bf2b86d54fb93fe7569c2b8,
 	void* _this, Player* pPlayer, const Block* pBlk, const BlockPos* pBlkpos, bool _bool) {
-	Log::Player::Block("Event", pPlayer->getNameTag()->c_str(), pPlayer->isStand(), pPlayer->getDimension(), u8"·ÅÖÃ", pBlk->getLegacyBlock()->getFullName(), pBlkpos->getPosition());
+	Log::Player::Block("Event", pPlayer->getNameTag()->c_str(), pPlayer->isStand(), pPlayer->getDimension(), u8"æ”¾ç½®", pBlk->getLegacyBlock()->getFullName(), pBlkpos->getPosition());
 	return original(_this, pPlayer, pBlk, pBlkpos, _bool);
 }
-// Íæ¼Ò²Ù×÷ÎïÆ·
+// ç©å®¶æ“ä½œç‰©å“
 THook(bool,
 	MSSYM_B1QA9useItemOnB1AA8GameModeB2AAA4UEAAB1UE14NAEAVItemStackB2AAE12AEBVBlockPosB2AAA9EAEBVVec3B2AAA9PEBVBlockB3AAAA1Z,
 	void* _this, ItemStack* item, const BlockPos* pBlkpos, unsigned __int8 a4, void *v5, Block* pBlk) {
@@ -225,11 +340,11 @@ THook(bool,
 	std::string mstr = item->getName();
 	bool ret = original(_this, item, pBlkpos, a4, v5, pBlk);
 	if (ret) {
-		Log::Player::Item("Event", pPlayer->getNameTag()->c_str(), pPlayer->isStand(), pPlayer->getDimension(), u8"²Ù×÷", mstr, pBlkpos->getPosition());
+		Log::Player::Item("Event", pPlayer->getNameTag()->c_str(), pPlayer->isStand(), pPlayer->getDimension(), u8"æ“ä½œ", mstr, pBlkpos->getPosition());
 	}
 	return ret;
 }
-// Íæ¼ÒÆÆ»µ·½¿é
+// ç©å®¶ç ´åæ–¹å—
 THook(bool,
 	MSSYM_B2QUE20destroyBlockInternalB1AA8GameModeB2AAA4AEAAB1UE13NAEBVBlockPosB2AAA1EB1AA1Z,
 	void * _this, const BlockPos* pBlkpos) {
@@ -240,48 +355,48 @@ THook(bool,
 	bool ret = original(_this, pBlkpos);
 	if (!ret)
 		return ret;
-	Log::Player::Block("Event", pPlayer->getNameTag()->c_str(), pPlayer->isStand(), pPlayer->getDimension(), u8"ÆÆ»µ", block_name, pBlkpos->getPosition());
+	Log::Player::Block("Event", pPlayer->getNameTag()->c_str(), pPlayer->isStand(), pPlayer->getDimension(), u8"ç ´å", block_name, pBlkpos->getPosition());
 	return ret;
 }
 
-// Íæ¼Ò´ò¿ªÏä×Ó
+// ç©å®¶æ‰“å¼€ç®±å­
 THook(void,
 	MSSYM_B1QA9startOpenB1AE15ChestBlockActorB2AAE15UEAAXAEAVPlayerB3AAAA1Z,
 	void* _this, Player* pPlayer) {
 	auto real_this = reinterpret_cast<void*>(reinterpret_cast<VA>(_this) - 248);
 	auto pBlkpos = reinterpret_cast<BlockActor*>(real_this)->getPosition();
-	Log::Player::Interaction("Event", pPlayer->getNameTag()->c_str(), pPlayer->isStand(), pPlayer->getDimension(), u8"¿ªÆô", u8"Ïä×Ó", pBlkpos->getPosition());
+	Log::Player::Interaction("Event", pPlayer->getNameTag()->c_str(), pPlayer->isStand(), pPlayer->getDimension(), u8"å¼€å¯", u8"ç®±å­", pBlkpos->getPosition());
 	original(_this, pPlayer);
 }
-// Íæ¼Ò´ò¿ªÄ¾Í°
+// ç©å®¶æ‰“å¼€æœ¨æ¡¶
 THook(void,
 	MSSYM_B1QA9startOpenB1AE16BarrelBlockActorB2AAE15UEAAXAEAVPlayerB3AAAA1Z,
 	void* _this, Player* pPlayer) {
 	auto real_this = reinterpret_cast<void*>(reinterpret_cast<VA>(_this) - 248);
 	auto pBlkpos = reinterpret_cast<BlockActor*>(real_this)->getPosition();
-	Log::Player::Interaction("Event", pPlayer->getNameTag()->c_str(), pPlayer->isStand(), pPlayer->getDimension(), u8"¿ªÆô", u8"Ä¾Í°", pBlkpos->getPosition());
+	Log::Player::Interaction("Event", pPlayer->getNameTag()->c_str(), pPlayer->isStand(), pPlayer->getDimension(), u8"å¼€å¯", u8"æœ¨æ¡¶", pBlkpos->getPosition());
 	original(_this, pPlayer);
 }
-// Íæ¼Ò¹Ø±ÕÏä×Ó
+// ç©å®¶å…³é—­ç®±å­
 THook(__int64,
 	MSSYM_B1QA8stopOpenB1AE15ChestBlockActorB2AAE15UEAAXAEAVPlayerB3AAAA1Z,
 	void* _this, Player * pPlayer) {
 	auto real_this = reinterpret_cast<void*>(reinterpret_cast<VA>(_this) - 248);
 	auto pBlkpos = reinterpret_cast<BlockActor*>(real_this)->getPosition();
-	Log::Player::Interaction("Event", pPlayer->getNameTag()->c_str(), pPlayer->isStand(), pPlayer->getDimension(), u8"¹Ø±Õ", u8"Ïä×Ó", pBlkpos->getPosition());
+	Log::Player::Interaction("Event", pPlayer->getNameTag()->c_str(), pPlayer->isStand(), pPlayer->getDimension(), u8"å…³é—­", u8"ç®±å­", pBlkpos->getPosition());
 	return original(_this, pPlayer);
 }
-// Íæ¼Ò¹Ø±ÕÄ¾Í°
+// ç©å®¶å…³é—­æœ¨æ¡¶
 THook(__int64,
 	MSSYM_B1QA8stopOpenB1AE16BarrelBlockActorB2AAE15UEAAXAEAVPlayerB3AAAA1Z,
 	void* _this, Player* pPlayer) {
 	auto real_this = reinterpret_cast<void*>(reinterpret_cast<VA>(_this) - 248);
 	auto pBlkpos = reinterpret_cast<BlockActor*>(real_this)->getPosition();
-	Log::Player::Interaction("Event", pPlayer->getNameTag()->c_str(), pPlayer->isStand(), pPlayer->getDimension(), u8"¹Ø±Õ", u8"Ä¾Í°", pBlkpos->getPosition());
+	Log::Player::Interaction("Event", pPlayer->getNameTag()->c_str(), pPlayer->isStand(), pPlayer->getDimension(), u8"å…³é—­", u8"æœ¨æ¡¶", pBlkpos->getPosition());
 	return original(_this, pPlayer);
 }
 
-// ÈİÆ÷ÄÚÎïÆ·¸Ä±ä
+// å®¹å™¨å†…ç‰©å“æ”¹å˜
 THook(void, MSSYM_B1QE23containerContentChangedB1AE19LevelContainerModelB2AAA6UEAAXHB1AA1Z,
 	LevelContainerModel* a1, VA a2) {
 	VA v3 = *((VA*)a1 + 26);
@@ -289,7 +404,7 @@ THook(void, MSSYM_B1QE23containerContentChangedB1AE19LevelContainerModelB2AAA6UE
 	BlockPos* pBlkpos = (BlockPos*)((char*)a1 + 216);
 	Block* pBlk = bs->getBlock(pBlkpos);
 	short id = pBlk->getLegacyBlock()->getBlockItemId();
-	if (id == 54 || id == 130 || id == 146 || id == -203 || id == 205 || id == 218) {	// ·ÇÏä×Ó¡¢Í°¡¢Ç±Ó°ºĞµÄÇé¿ö²»×÷´¦Àí
+	if (id == 54 || id == 130 || id == 146 || id == -203 || id == 205 || id == 218) {	// éç®±å­ã€æ¡¶ã€æ½œå½±ç›’çš„æƒ…å†µä¸ä½œå¤„ç†
 		auto slot = a2;
 		auto v5 = (*(VA(**)(LevelContainerModel*))(*(VA*)a1 + 160))(a1);
 		ItemStack* v9 = SYM_POINT(ItemStack, MSSYM_B1QA5EMPTYB1UA4ITEMB1AA9ItemStackB2AAA32V1B1AA1B);
@@ -310,7 +425,7 @@ THook(void, MSSYM_B1QE23containerContentChangedB1AE19LevelContainerModelB2AAA6UE
 	original(a1, a2);
 }
 
-// Íæ¼ÒÇĞ»»Î¬¶È
+// ç©å®¶åˆ‡æ¢ç»´åº¦
 THook(bool,
 	MSSYM_B2QUE21playerChangeDimensionB1AA5LevelB2AAA4AEAAB1UE11NPEAVPlayerB2AAE26AEAVChangeDimensionRequestB3AAAA1Z,
 	void* _this, Player* pPlayer, void* req) {
@@ -320,7 +435,7 @@ THook(bool,
 	return ret;
 }
 
-// ÃüÃûÉúÎïËÀÍö
+// å‘½åç”Ÿç‰©æ­»äº¡
 THook(void,
 	MSSYM_B1QA3dieB1AA3MobB2AAE26UEAAXAEBVActorDamageSourceB3AAAA1Z,
 	Mob* _this, void* dmsg) {
@@ -345,7 +460,7 @@ THook(void,
 	original(_this, dmsg);
 }
 
-// ÁÄÌìÏûÏ¢
+// èŠå¤©æ¶ˆæ¯
 THook(void,
 	MSSYM_MD5_ad251f2fd8c27eb22c0c01209e8df83c,
 	void * _this, std::string& player_name, std::string& target, std::string& msg, std::string& char_style) {
@@ -354,12 +469,12 @@ THook(void,
 		Log::Player::ChatMessage("Chat", player_name, target, msg, char_style);
 }
 
-// ÏÂÃæÁ½¸öº¯Êı²»ÊÇ±ØÒªµÄ£¬Äã¿ÉÒÔÊ¹ÓÃ£¬Ò²¿ÉÒÔ²»Ê¹ÓÃ¡£
+// ä¸‹é¢ä¸¤ä¸ªå‡½æ•°ä¸æ˜¯å¿…è¦çš„ï¼Œä½ å¯ä»¥ä½¿ç”¨ï¼Œä¹Ÿå¯ä»¥ä¸ä½¿ç”¨ã€‚
 void mod_init() {
-	// ´Ë´¦ÌîĞ´Ä£¿é¼ÓÔØÊ±ºòµÄ²Ù×÷
+	// æ­¤å¤„å¡«å†™æ¨¡å—åŠ è½½æ—¶å€™çš„æ“ä½œ
 	// system("chcp 65001");
-	std::cout << u8"{¼à¿Ø²å¼şÒÑ¼ÓÔØ¡£" << std::endl;
+	std::cout << u8"{ç›‘æ§æ’ä»¶å·²åŠ è½½ã€‚" << std::endl;
 }
 void mod_exit() {
-	// ´Ë´¦ÌîĞ´Ä£¿éĞ¶ÔØÊ±ºòµÄ²Ù×÷
+	// æ­¤å¤„å¡«å†™æ¨¡å—å¸è½½æ—¶å€™çš„æ“ä½œ
 }
